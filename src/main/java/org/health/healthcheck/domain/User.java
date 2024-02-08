@@ -1,11 +1,9 @@
 package org.health.healthcheck.domain;
 
-import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
 public class User {
-
 
     private Integer userId;
     private String typeId;
@@ -79,4 +77,5 @@ public class User {
     public void setCurrentAge(String currentAge) {
         this.currentAge = currentAge;
     }
+
 }

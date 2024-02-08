@@ -7,11 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
-import java.util.Optional;
-
 public interface UsuarioCrudRepository extends CrudRepository<Usuario, Integer> {
-    //List<Producto> findByIdCategoriaOrderByNombreAsc(int idCategoria);
 
     //Calculate imc method
     @Query(value = "SELECT peso/(talla*talla/10000) AS imc " +
@@ -31,4 +27,5 @@ public interface UsuarioCrudRepository extends CrudRepository<Usuario, Integer> 
             "AS currentAge " +
             "FROM USUARIOS WHERE id_usuario = :userId", nativeQuery = true)
     UserProjection getCurrentAge(@Param("userId") int userId);
+
 }

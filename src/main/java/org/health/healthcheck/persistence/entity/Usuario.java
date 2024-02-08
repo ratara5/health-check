@@ -1,7 +1,7 @@
 package org.health.healthcheck.persistence.entity;
 
-import jakarta.persistence.*;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -24,10 +24,6 @@ public class Usuario {
     private float peso;
 
     private Integer talla;
-
-    /*@ManyToOne
-    @JoinColumn(name = "id_categoria", insertable = false, updatable = false)
-    private Categoria categoria;*/
 
     @Transient
     private float imc;

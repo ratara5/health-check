@@ -1,5 +1,6 @@
 package org.health.healthcheck.web.controller;
 
+
 import org.health.healthcheck.domain.User;
 import org.health.healthcheck.domain.service.UserService;
 import org.health.healthcheck.persistence.entity.UserProjection;

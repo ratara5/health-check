@@ -23,23 +23,11 @@ public class UserService {
         return userRepository.getUser(userId);
     }
 
-    //to calculate imc
-    /*public Optional<List<Product>> getByCategory(int categoryId){
-        return productRepository.getByCategory(categoryId);
-    }*/
-
-
     public User save(User user){
         return userRepository.save(user);
     }
 
     public boolean delete(int userId){
-        /*getUser(userId).map(user-> {
-            userRepository.delete(userId);
-            return true;
-        });
-        return false;*/
-
         Optional<User> userOptional = getUser(userId);
         if (userOptional.isPresent()) {
             userRepository.delete(userId);
@@ -48,7 +36,6 @@ public class UserService {
         return false;
     }
 
-
     public UserProjection getImc(int userId) {
         return userRepository.getImc(userId);
     }
@@ -56,4 +43,5 @@ public class UserService {
     public UserProjection getCurrentAge(int userId) {
         return userRepository.getCurrentAge(userId);
     }
+
 }

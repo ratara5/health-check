@@ -1,5 +1,6 @@
 package org.health.healthcheck.persistence;
 
+
 import org.health.healthcheck.domain.User;
 import org.health.healthcheck.domain.repository.UserRepository;
 import org.health.healthcheck.persistence.crud.UsuarioCrudRepository;
@@ -27,14 +28,6 @@ public class UsuarioRepository implements UserRepository {
         return mapper.toUsers(usuarios);
     }
 
-    //Link to calculate method
-    /*@Override
-    public Optional<List<Product>> getByCategory(int categoryId) {
-        List<Producto> productos = (List<Producto>) productoCrudRepository.findByIdCategoriaOrderByNombreAsc(categoryId);
-        return Optional.of(mapper.toProducts(productos));
-    }*/
-
-
     @Override
     public Optional<User> getUser(int userId) {
         return usuarioCrudRepository.findById(userId).map(usuario -> mapper.toUser(usuario));
@@ -60,4 +53,5 @@ public class UsuarioRepository implements UserRepository {
     public UserProjection getCurrentAge(int userId) {
         return usuarioCrudRepository.getCurrentAge(userId);
     }
+
 }
