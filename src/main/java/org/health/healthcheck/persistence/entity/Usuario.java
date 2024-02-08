@@ -16,7 +16,7 @@ public class Usuario {
     @Column(name = "tipo_id")
     private String tipoId;
 
-    private Integer nombre;
+    private String nombre;
 
     @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;
@@ -33,7 +33,7 @@ public class Usuario {
     private float imc;
 
     @Transient
-    private int edadActual;
+    private String edadActual;
 
     public Integer getIdUsuario() {
         return idUsuario;
@@ -51,11 +51,11 @@ public class Usuario {
         this.tipoId = tipoId;
     }
 
-    public Integer getNombre() {
+    public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(Integer nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
@@ -91,11 +91,12 @@ public class Usuario {
         this.imc = imc;
     }
 
-    public int getEdadActual() {
+    public String getEdadActual() {
         return edadActual;
     }
 
-    public void setEdadActual(int edadActual) {
+    public void setEdadActual(String edadActual) {
         this.edadActual = edadActual;
     }
+
 }

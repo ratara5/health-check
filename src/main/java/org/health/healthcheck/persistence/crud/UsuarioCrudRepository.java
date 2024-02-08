@@ -16,8 +16,8 @@ public interface UsuarioCrudRepository extends CrudRepository<Usuario, Integer> 
     //Calculate imc method
     @Query(value = "SELECT peso/(talla*talla/10000) AS imc " +
             "FROM USUARIOS " +
-            "WHERE id_usuario = :idUser;", nativeQuery = true)
-    UserProjection getImc(@Param("idUser") int idUser);
+            "WHERE id_usuario = :userId", nativeQuery = true)
+    UserProjection getImc(@Param("userId") int userId);
 
     //Calculate age method
     ////In mysql
@@ -27,8 +27,8 @@ public interface UsuarioCrudRepository extends CrudRepository<Usuario, Integer> 
     UserProjection getCurrentAge(@Param("idUser") int idUser);*/
 
     ////In postgresql
-    @Query(value = "SELECT AGE(fecha_nacimiento) " +
+    @Query(value = "SELECT TO_CHAR(AGE(fecha_nacimiento), 'YY \"Años\" mm \"Meses\" DD \"Días\"') " +
             "AS currentAge " +
-            "FROM USUARIOS WHERE id_usuario = :idUser;", nativeQuery = true)
-    UserProjection getCurrentAge(@Param("idUser") int idUser);
+            "FROM USUARIOS WHERE id_usuario = :userId", nativeQuery = true)
+    UserProjection getCurrentAge(@Param("userId") int userId);
 }

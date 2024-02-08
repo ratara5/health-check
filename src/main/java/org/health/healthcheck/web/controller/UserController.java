@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -34,7 +34,7 @@ public class UserController {
 
         //to calculate current age
         UserProjection userProjection2 = userService.getCurrentAge(userId);
-        int currentAge= userProjection2.getCurrentAge();
+        String currentAge= userProjection2.getCurrentAge();
         user.ifPresent(u->u.setCurrentAge(currentAge));
 
         return user

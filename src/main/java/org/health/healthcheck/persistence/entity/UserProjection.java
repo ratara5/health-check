@@ -5,6 +5,6 @@ public interface UserProjection {
     Long getIdUser();
     float getImc();
 
-    int getCurrentAge();
+    String getCurrentAge();
 
 }

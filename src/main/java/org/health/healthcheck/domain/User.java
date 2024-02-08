@@ -9,12 +9,12 @@ public class User {
 
     private Integer userId;
     private String typeId;
-    private Integer name;
+    private String name;
     private LocalDate birthDate;
     private float weight;
     private Integer height;
     private float imc; //bmi in English
-    private int currentAge;
+    private String currentAge;
 
     public Integer getUserId() {
         return userId;
@@ -32,11 +32,11 @@ public class User {
         this.typeId = typeId;
     }
 
-    public Integer getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(Integer name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -72,11 +72,11 @@ public class User {
         this.imc = imc;
     }
 
-    public int getCurrentAge() {
+    public String getCurrentAge() {
         return currentAge;
     }
 
-    public void setCurrentAge(int currentAge) {
+    public void setCurrentAge(String currentAge) {
         this.currentAge = currentAge;
     }
 }
