@@ -34,10 +34,17 @@ public class UserService {
     }
 
     public boolean delete(int userId){
-        getUser(userId).map(user-> {
+        /*getUser(userId).map(user-> {
             userRepository.delete(userId);
             return true;
         });
+        return false;*/
+
+        Optional<User> userOptional = getUser(userId);
+        if (userOptional.isPresent()) {
+            userRepository.delete(userId);
+            return true;
+        }
         return false;
     }
 

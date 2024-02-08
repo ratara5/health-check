@@ -54,6 +54,6 @@ public class UserController {
         if(userService.delete(userId)){
             return new ResponseEntity(HttpStatus.OK);
         }
-        return new ResponseEntity(HttpStatus.NOT_FOUND);
+        return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
