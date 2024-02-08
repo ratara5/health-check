@@ -12,7 +12,7 @@
     ```
  5. Crear contenedor:
     ```
-    docker-compose up -d
+    docker compose up -d
     ```
  6. Verificar si fué creado correctamente:
     ```
