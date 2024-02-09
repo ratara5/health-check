@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -44,4 +45,27 @@ public class UserService {
         return userRepository.getCurrentAge(userId);
     }
 
+    public User update(int userId, User user) {
+
+        return getUser(userId).map(existingUser -> {
+            if(!Objects.equals(user.getTypeId(), null)){
+                existingUser.setTypeId(user.getTypeId());
+            }
+            if(!Objects.equals(user.getName(), null)) {
+                existingUser.setName(user.getName());
+            }
+            if(!Objects.equals(user.getBirthDate(), null)) {
+                existingUser.setBirthDate(user.getBirthDate());
+            }
+            if(!Objects.equals(user.getWeight(), 0.0f)) {
+                existingUser.setWeight(user.getWeight());
+            }
+            if(!Objects.equals(user.getHeight(), null)) {
+                existingUser.setHeight(user.getHeight());
+            }
+
+            return userRepository.save(existingUser);
+        }).orElse(null);
+
+    }
 }

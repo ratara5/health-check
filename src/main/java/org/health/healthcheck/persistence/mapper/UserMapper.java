@@ -10,7 +10,7 @@ import org.mapstruct.Mappings;
 
 import java.util.List;
 
-@Mapper(componentModel ="spring") //uses = {CategoryMapper.class}
+@Mapper(componentModel ="spring")
 public interface UserMapper {
 
     @Mappings({

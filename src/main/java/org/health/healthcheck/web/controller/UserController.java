@@ -15,6 +15,7 @@ import java.util.*;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+
     @Autowired
     private UserService userService;
 
@@ -57,4 +58,14 @@ public class UserController {
         }
         return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity updateUser(@PathVariable("id") int userId, @RequestBody User user){
+        User updatedUser = userService.update(userId, user);
+        if(updatedUser != null){
+            return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
 }
