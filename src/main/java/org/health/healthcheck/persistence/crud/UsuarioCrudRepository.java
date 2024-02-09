@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 public interface UsuarioCrudRepository extends CrudRepository<Usuario, Integer> {
 
     //Calculate imc method
-    @Query(value = "SELECT peso/(talla*talla/10000) AS imc " +
+    @Query(value = "SELECT 10000*peso/(talla*talla) AS imc " +
             "FROM USUARIOS " +
             "WHERE id_usuario = :userId", nativeQuery = true)
     UserProjection getImc(@Param("userId") int userId);
