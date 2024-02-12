@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
-//start point for historical-measures
+//This is the start point for historical-measures
 @Entity
 @Table(name = "MEDIDAS")
 public class Medida {
