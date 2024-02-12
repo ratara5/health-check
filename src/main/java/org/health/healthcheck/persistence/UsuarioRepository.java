@@ -29,8 +29,9 @@ public class UsuarioRepository implements UserRepository {
     }
 
     @Override
-    public Optional<User> getUser(int userId) {
-        return usuarioCrudRepository.findById(userId).map(usuario -> mapper.toUser(usuario));
+    public Optional<User> getUser(String typeId, String userId) {
+        //return usuarioCrudRepository.findById(userId).map(usuario -> mapper.toUser(usuario));
+        return usuarioCrudRepository.findById_TipoIdAndId_IdUsuario(typeId, userId).map(usuario -> mapper.toUser(usuario));
     }
 
     @Override
@@ -40,18 +41,13 @@ public class UsuarioRepository implements UserRepository {
     }
 
     @Override
-    public void delete(int userId){
-        usuarioCrudRepository.deleteById(userId);
+    public void delete(String typeId, String userId){
+        usuarioCrudRepository.deleteById_TipoIdAndId_IdUsuario(typeId, userId);
     }
 
     @Override
-    public UserProjection getImc(int userId) {
-        return usuarioCrudRepository.getImc(userId);
-    }
-
-    @Override
-    public UserProjection getCurrentAge(int userId) {
-        return usuarioCrudRepository.getCurrentAge(userId);
+    public UserProjection getCurrentAge(String typeId, String userId) {
+        return usuarioCrudRepository.getCurrentAge(typeId, userId);
     }
 
 }

@@ -1,6 +1,7 @@
 package org.health.healthcheck.web.controller;
 
 
+import org.health.healthcheck.domain.Measure;
 import org.health.healthcheck.domain.User;
 import org.health.healthcheck.domain.service.MeasureService;
 import org.health.healthcheck.domain.service.UserService;
@@ -12,38 +13,47 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/measures")
+public class MeasureController {
 
     @Autowired
     private UserService userService;
     @Autowired
     private MeasureService measureService;
 
-    @GetMapping("/all")
-    public ResponseEntity<List<User>> getAll(){
-        return new ResponseEntity<>(userService.getAll(), HttpStatus.OK);
+    public Map<Integer, Float> getImcs(String typeId, String userId) {
+        Map<Integer, Float> imcsHashMap = new HashMap<>();
+        List<MeasureProjection> imcs = measureService.getImcs(typeId, userId);
+        for (MeasureProjection entry : imcs) {
+            Integer measureId = entry.getMeasureId();
+            Float imc = entry.getImc();
+            if (Objects.nonNull(entry.getMeasureId()) && Objects.nonNull(entry.getImc())) {
+                imcsHashMap.put(entry.getMeasureId(), entry.getImc());
+            }
+        }
+        return imcsHashMap;
     }
 
-    @GetMapping("/{type}-{id}")
-    public ResponseEntity<User> getUser(@PathVariable("type") String typeId, @PathVariable("id") String userId){
 
-        Optional<User> user = userService.getUser(typeId, userId);
+    @GetMapping("user/{type}-{id}")
+    public ResponseEntity<List<Measure>> getByUser(@PathVariable("type") String typeId, @PathVariable("id") String userId){
 
-        //to calculate imc
-        /*List<MeasureProjection> measureProjection = measureService.getImc(typeId, userId);
-        float imc= measureProjection.getImc();*/
+        Optional<List<Measure>> measures = measureService.getByUser(typeId, userId);
+        Map<Integer, Float> imcsMap = getImcs(typeId, userId);
 
-        //to calculate current age
-        UserProjection userProjection2 = userService.getCurrentAge(typeId, userId);
-        String currentAge= userProjection2.getCurrentAge();
-        user.ifPresent(u->u.setCurrentAge(currentAge));
+        measures.ifPresent(ms-> {
+                    ms.forEach(m -> m.setImc(imcsMap.get(m.getMeasureId())));
 
-        return user
-                .map(u->new ResponseEntity<>(u, HttpStatus.OK))
+        });
+
+
+        return measures
+                .map(ms->new ResponseEntity<>(ms, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
     }

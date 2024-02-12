@@ -10,10 +10,10 @@ import java.util.Optional;
 public interface UserRepository {
 
     List<User> getAll();
-    Optional<User> getUser(int userId);
+    Optional<User> getUser(String typeId, String userId);
     User save(User user);
-    void delete(int userId);
-    UserProjection getImc(int userId);
-    UserProjection getCurrentAge(int userId);
+    void delete(String typeId, String userId);
+
+    UserProjection getCurrentAge(String typeId, String userId);
 
 }

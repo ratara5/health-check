@@ -10,17 +10,15 @@ import org.mapstruct.Mappings;
 
 import java.util.List;
 
-@Mapper(componentModel ="spring")
+@Mapper(componentModel ="spring", uses={MeasureMapper.class})
 public interface UserMapper {
 
     @Mappings({
-            @Mapping(source = "idUsuario", target = "userId"),
-            @Mapping(source = "tipoId", target = "typeId"),
+            @Mapping(source = "id.idUsuario", target = "userId"),
+            @Mapping(source = "id.tipoId", target = "typeId"),
             @Mapping(source = "nombre", target = "name"),
             @Mapping(source = "fechaNacimiento", target = "birthDate"),
-            @Mapping(source = "peso", target = "weight"),
-            @Mapping(source = "talla", target = "height"),
-            @Mapping(source = "imc", target = "imc"),
+            @Mapping(source = "medidas", target = "measures"),
             @Mapping(source = "edadActual", target = "currentAge"),
     })
     User toUser(Usuario usuario);

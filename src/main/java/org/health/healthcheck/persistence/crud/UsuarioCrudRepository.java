@@ -3,17 +3,22 @@ package org.health.healthcheck.persistence.crud;
 
 import org.health.healthcheck.persistence.entity.Usuario;
 import org.health.healthcheck.persistence.entity.UserProjection;
+import org.health.healthcheck.persistence.entity.UsuarioPK;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-public interface UsuarioCrudRepository extends CrudRepository<Usuario, Integer> {
+import java.util.Optional;
 
-    //Calculate imc method
-    @Query(value = "SELECT 10000*peso/(talla*talla) AS imc " +
-            "FROM USUARIOS " +
-            "WHERE id_usuario = :userId", nativeQuery = true)
-    UserProjection getImc(@Param("userId") int userId);
+public interface UsuarioCrudRepository extends CrudRepository<Usuario, UsuarioPK> {
+
+
+
+    Optional<Usuario> findById_TipoIdAndId_IdUsuario(String typeId, String userId);
+
+    void deleteById_TipoIdAndId_IdUsuario(String typeId, String userId);
+
+
 
     //Calculate age method
     ////In mysql
@@ -23,9 +28,11 @@ public interface UsuarioCrudRepository extends CrudRepository<Usuario, Integer> 
     UserProjection getCurrentAge(@Param("idUser") int idUser);*/
 
     ////In postgresql
-    @Query(value = "SELECT TO_CHAR(AGE(fecha_nacimiento), 'YY \"Años\" mm \"Meses\" DD \"Días\"') " +
+    @Query(value = "SELECT TO_CHAR(AGE(fecha_nacimiento), 'YY \"Años\" mm \"Meses\" DD') " +
             "AS currentAge " +
-            "FROM USUARIOS WHERE id_usuario = :userId", nativeQuery = true)
-    UserProjection getCurrentAge(@Param("userId") int userId);
+            "FROM USUARIOS " +
+            "WHERE tipo_id = :typeId AND id_usuario = :userId", nativeQuery = true)
+    UserProjection getCurrentAge(@Param("typeId") String typeId,
+                                 @Param("userId") String userId);
 
 }

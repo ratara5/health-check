@@ -1,50 +1,38 @@
 package org.health.healthcheck.persistence.entity;
 
 
+import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.persistence.*;
 import java.time.LocalDate;
+
+import java.util.List;
 
 @Entity
 @Table(name = "USUARIOS")
 public class Usuario {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column( name = "id_usuario")
-    private Integer idUsuario;
-
-    @Column(name = "tipo_id")
-    private String tipoId;
-
+    @EmbeddedId
+    private UsuarioPK id;
     private String nombre;
 
     @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;
 
-    private float peso;
 
-    private Integer talla;
-
-    @Transient
-    private float imc;
+    @OneToMany(mappedBy = "usuario")
+    private List<Medida> medidas;
 
     @Transient
     private String edadActual;
 
-    public Integer getIdUsuario() {
-        return idUsuario;
+
+
+    public UsuarioPK getId() {
+        return id;
     }
 
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public String getTipoId() {
-        return tipoId;
-    }
-
-    public void setTipoId(String tipoId) {
-        this.tipoId = tipoId;
+    public void setId(UsuarioPK id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -63,28 +51,12 @@ public class Usuario {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public float getPeso() {
-        return peso;
+    public List<Medida> getMedidas() {
+        return medidas;
     }
 
-    public void setPeso(float peso) {
-        this.peso = peso;
-    }
-
-    public Integer getTalla() {
-        return talla;
-    }
-
-    public void setTalla(Integer talla) {
-        this.talla = talla;
-    }
-
-    public float getImc() {
-        return imc;
-    }
-
-    public void setImc(float imc) {
-        this.imc = imc;
+    public void setMedidas(List<Medida> medidas) {
+        this.medidas = medidas;
     }
 
     public String getEdadActual() {
@@ -94,5 +66,7 @@ public class Usuario {
     public void setEdadActual(String edadActual) {
         this.edadActual = edadActual;
     }
+
+
 
 }

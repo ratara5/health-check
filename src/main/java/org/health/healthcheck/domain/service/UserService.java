@@ -20,34 +20,31 @@ public class UserService {
         return userRepository.getAll();
     }
 
-    public Optional<User> getUser(int userId){
-        return userRepository.getUser(userId);
+    public Optional<User> getUser(String typeId, String userId){
+        return userRepository.getUser(typeId, userId);
     }
 
     public User save(User user){
         return userRepository.save(user);
     }
 
-    public boolean delete(int userId){
-        Optional<User> userOptional = getUser(userId);
+    public boolean delete(String typeId, String userId){
+        Optional<User> userOptional = getUser(typeId, userId);
         if (userOptional.isPresent()) {
-            userRepository.delete(userId);
+            userRepository.delete(typeId, userId);
             return true;
         }
         return false;
     }
 
-    public UserProjection getImc(int userId) {
-        return userRepository.getImc(userId);
+
+    public UserProjection getCurrentAge(String typeId, String userId) {
+        return userRepository.getCurrentAge(typeId, userId);
     }
 
-    public UserProjection getCurrentAge(int userId) {
-        return userRepository.getCurrentAge(userId);
-    }
+    public User update(String typeId, String userId, User user) {
 
-    public User update(int userId, User user) {
-
-        return getUser(userId).map(existingUser -> {
+        return getUser(typeId, userId).map(existingUser -> {
             if(!Objects.equals(user.getTypeId(), null)){
                 existingUser.setTypeId(user.getTypeId());
             }
@@ -57,12 +54,12 @@ public class UserService {
             if(!Objects.equals(user.getBirthDate(), null)) {
                 existingUser.setBirthDate(user.getBirthDate());
             }
-            if(!Objects.equals(user.getWeight(), 0.0f)) {
+            /*if(!Objects.equals(user.getWeight(), 0.0f)) {
                 existingUser.setWeight(user.getWeight());
             }
             if(!Objects.equals(user.getHeight(), null)) {
                 existingUser.setHeight(user.getHeight());
-            }
+            }*/
 
             return userRepository.save(existingUser);
         }).orElse(null);

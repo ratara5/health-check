@@ -1,24 +1,25 @@
 package org.health.healthcheck.domain;
 
 
+import org.health.healthcheck.persistence.entity.Medida;
+
 import java.time.LocalDate;
+import java.util.List;
 
 public class User {
 
-    private Integer userId;
+    private String userId;
     private String typeId;
     private String name;
     private LocalDate birthDate;
-    private float weight;
-    private Integer height;
-    private float imc; //bmi in English
+    private List<Measure> measures;
     private String currentAge;
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -46,28 +47,13 @@ public class User {
         this.birthDate = birthDate;
     }
 
-    public float getWeight() {
-        return weight;
+
+    public List<Measure> getMeasures() {
+        return measures;
     }
 
-    public void setWeight(float weight) {
-        this.weight = weight;
-    }
-
-    public Integer getHeight() {
-        return height;
-    }
-
-    public void setHeight(Integer height) {
-        this.height = height;
-    }
-
-    public float getImc() {
-        return imc;
-    }
-
-    public void setImc(float imc) {
-        this.imc = imc;
+    public void setMeasures(List<Measure> measures) {
+        this.measures = measures;
     }
 
     public String getCurrentAge() {
