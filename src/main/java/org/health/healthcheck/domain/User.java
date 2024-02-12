@@ -1,8 +1,6 @@
 package org.health.healthcheck.domain;
 
 
-import org.health.healthcheck.persistence.entity.Medida;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -46,7 +44,6 @@ public class User {
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
-
 
     public List<Measure> getMeasures() {
         return measures;

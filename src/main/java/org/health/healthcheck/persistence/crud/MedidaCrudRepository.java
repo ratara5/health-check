@@ -1,6 +1,6 @@
 package org.health.healthcheck.persistence.crud;
 
-import org.antlr.v4.runtime.misc.MultiMap;
+
 import org.health.healthcheck.persistence.entity.*;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -18,8 +18,7 @@ public interface MedidaCrudRepository extends CrudRepository<Medida, MedidaPK> {
     List<MeasureProjection> getImcs(@Param("typeId") String typeId,
                              @Param("userId") String userId);
 
-
-
+    //Get a measure by typeId and userId (which are not primary compose key)
     /*@Query("SELECT medida " +
             "FROM Medida medida " +
             "WHERE medida.usuario.tipoId = :typeId AND medida.usuario.idUsuario = :userId")*/
@@ -28,4 +27,5 @@ public interface MedidaCrudRepository extends CrudRepository<Medida, MedidaPK> {
     "WHERE tipo_id = :typeId and id_usuario = :userId", nativeQuery = true)
     Optional<List<Medida>> getByTipoIdAndIdUsuario(@Param("typeId") String typeId,
                                                     @Param("userId") String userId);
+
 }

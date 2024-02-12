@@ -12,13 +12,9 @@ import java.util.Optional;
 
 public interface UsuarioCrudRepository extends CrudRepository<Usuario, UsuarioPK> {
 
-
-
     Optional<Usuario> findById_TipoIdAndId_IdUsuario(String typeId, String userId);
 
     void deleteById_TipoIdAndId_IdUsuario(String typeId, String userId);
-
-
 
     //Calculate age method
     ////In mysql

@@ -6,23 +6,18 @@ import org.health.healthcheck.domain.User;
 import org.health.healthcheck.domain.service.MeasureService;
 import org.health.healthcheck.domain.service.UserService;
 import org.health.healthcheck.persistence.entity.MeasureProjection;
-import org.health.healthcheck.persistence.entity.UserProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/measures")
 public class MeasureController {
 
-    @Autowired
-    private UserService userService;
     @Autowired
     private MeasureService measureService;
 
@@ -39,7 +34,6 @@ public class MeasureController {
         return imcsHashMap;
     }
 
-
     @GetMapping("user/{type}-{id}")
     public ResponseEntity<List<Measure>> getByUser(@PathVariable("type") String typeId, @PathVariable("id") String userId){
 
@@ -51,36 +45,16 @@ public class MeasureController {
 
         });
 
-
         return measures
                 .map(ms->new ResponseEntity<>(ms, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
     }
 
-    @PostMapping("/save")
-    public ResponseEntity<User> save(@RequestBody User user){
+    //TODO: @PostMapping("/save")
 
-        return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
-    }
+    //TODO: @DeleteMapping("/delete/{type}-{id}")
 
-    @DeleteMapping("/delete/{type}-{id}")
-    public ResponseEntity delete(@PathVariable("type") String typeId, @PathVariable("id") String userId){
-        if(userService.delete(typeId, userId)){
-            return new ResponseEntity(HttpStatus.OK);
-        }
-        return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
-    @PutMapping("/update/{type}-{id}")
-    public ResponseEntity updateUser(@PathVariable("type") String typeId,
-                                     @PathVariable("id") String userId,
-                                     @RequestBody User user){
-        User updatedUser = userService.update(typeId, userId, user);
-        if(updatedUser != null){
-            return new ResponseEntity<>(updatedUser, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
+    //TODO: @PutMapping("/update/{type}-{id}")
 
 }

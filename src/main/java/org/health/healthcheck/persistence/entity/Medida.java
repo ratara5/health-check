@@ -3,8 +3,6 @@ package org.health.healthcheck.persistence.entity;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
-
 //This is the start point for historical-measures
 @Entity
 @Table(name = "MEDIDAS")
@@ -28,7 +26,6 @@ public class Medida {
     public MedidaPK getId() {
         return id;
     }
-
 
     public void setId(MedidaPK id) {
         this.id = id;
@@ -57,4 +54,5 @@ public class Medida {
     public void setImc(float imc) {
         this.imc = imc;
     }
+
 }

@@ -30,4 +30,5 @@ public class UsuarioPK implements Serializable {
     public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
+
 }

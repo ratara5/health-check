@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @Service
 public class UserService {
+
     @Autowired
     private UserRepository userRepository;
 
@@ -36,7 +37,6 @@ public class UserService {
         }
         return false;
     }
-
 
     public UserProjection getCurrentAge(String typeId, String userId) {
         return userRepository.getCurrentAge(typeId, userId);
@@ -65,4 +65,5 @@ public class UserService {
         }).orElse(null);
 
     }
+
 }

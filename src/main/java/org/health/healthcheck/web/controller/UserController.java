@@ -4,7 +4,6 @@ package org.health.healthcheck.web.controller;
 import org.health.healthcheck.domain.User;
 import org.health.healthcheck.domain.service.MeasureService;
 import org.health.healthcheck.domain.service.UserService;
-import org.health.healthcheck.persistence.entity.MeasureProjection;
 import org.health.healthcheck.persistence.entity.UserProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,8 +19,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private MeasureService measureService;
 
     @GetMapping("/all")
     public ResponseEntity<List<User>> getAll(){
@@ -32,10 +29,6 @@ public class UserController {
     public ResponseEntity<User> getUser(@PathVariable("type") String typeId, @PathVariable("id") String userId){
 
         Optional<User> user = userService.getUser(typeId, userId);
-
-        //to calculate imc
-        /*List<MeasureProjection> measureProjection = measureService.getImc(typeId, userId);
-        float imc= measureProjection.getImc();*/
 
         //to calculate current age
         UserProjection userProjection2 = userService.getCurrentAge(typeId, userId);
@@ -50,7 +43,6 @@ public class UserController {
 
     @PostMapping("/save")
     public ResponseEntity<User> save(@RequestBody User user){
-
         return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
     }
 

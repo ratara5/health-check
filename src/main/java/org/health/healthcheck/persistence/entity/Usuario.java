@@ -1,7 +1,6 @@
 package org.health.healthcheck.persistence.entity;
 
 
-import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
@@ -13,19 +12,17 @@ public class Usuario {
 
     @EmbeddedId
     private UsuarioPK id;
+
     private String nombre;
 
     @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;
-
 
     @OneToMany(mappedBy = "usuario")
     private List<Medida> medidas;
 
     @Transient
     private String edadActual;
-
-
 
     public UsuarioPK getId() {
         return id;
@@ -66,7 +63,5 @@ public class Usuario {
     public void setEdadActual(String edadActual) {
         this.edadActual = edadActual;
     }
-
-
 
 }

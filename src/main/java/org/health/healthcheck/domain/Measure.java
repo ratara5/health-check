@@ -10,7 +10,6 @@ public class Measure {
     private User user;
     private float weight;
     private Integer height;
-
     private float imc;
 
     public Integer getMeasureId() {
@@ -60,4 +59,5 @@ public class Measure {
     public void setImc(float imc) {
         this.imc = imc;
     }
+
 }
