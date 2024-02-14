@@ -22,6 +22,7 @@ CREATE TABLE MEDIDAS (
   fecha_toma DATE,
   peso FLOAT,
   talla INT,
-  FOREIGN KEY (tipo_id, id_usuario)  REFERENCES USUARIOS (tipo_id, id_usuario),
+  FOREIGN KEY (tipo_id, id_usuario)  REFERENCES USUARIOS (tipo_id, id_usuario) ON DELETE CASCADE,
   PRIMARY KEY (id_medida, fecha_toma)
   );
+--ON DELETE CASCADE: AT delete usuario, THEN medida(s) ASSOCIATED WILL BE DELETED TOO
