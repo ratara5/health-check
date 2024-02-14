@@ -1,5 +1,5 @@
-/*CREATE DATABASE healthcheck;*/
-USE healthcheck;
+/*CREATE DATABASE healthcheckBASIC;*/
+--USE healthcheck;
 
 
 /*Table "USUARIOS"*/
